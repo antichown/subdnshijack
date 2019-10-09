@@ -49,11 +49,11 @@ def whois_calculate(domain,regex_expir):
         split_day=str_day.split(" days")[0]
         if int(split_day)>=-150:
             print(Fore.YELLOW+"[----] %s (%s) - day= %s " % (domain,ex_date,split_day)+Style.RESET_ALL)
-            print(Fore.RED+"[----] %s VULN (%s) " % (domain,ex_date)+Style.RESET_ALL)    
+            print(Fore.RED+"[----] %s ALERT (%s) " % (domain,ex_date)+Style.RESET_ALL)    
             
             
     if ex_date_years <= year:
-        print(Fore.RED+"[----] %s VULN (%s) " % (domain,ex_date)+Style.RESET_ALL)    
+        print(Fore.RED+"[----] %s ALERT (%s) " % (domain,ex_date)+Style.RESET_ALL)    
             
             
     
