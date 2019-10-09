@@ -6,7 +6,7 @@ import subprocess
 from colorama import Style, Fore, init
 import sys
 import tldextract
-from datetime import datetime
+from datetime import datetime,date
 import re
 
 now = datetime.now()
@@ -29,16 +29,35 @@ def whois_calculate(domain,regex_expir):
     #print("year:", year)
     month = now_date.strftime("%m")
     #print("month:", month)
+    day1 = now_date.strftime("%d")
     
     reg_date=re.search("Registry Expiry Date: (.*?)Z", regex_expir)
     if reg_date:
         ex_date=reg_date.group(1)
         ex_date_years=ex_date.split("-")[0]
         ex_date_month=ex_date.split("-")[1]
+        ex_date_days=ex_date.split("-")[2]
+        
+        ex_date_dd=ex_date_days.split("T")[0]
     
+        
+    date_1 = date(year = int(year), month = int(month), day = int(day1))
+    date_2 = date(year = int(ex_date_years), month=int(ex_date_month), day = int(ex_date_dd))
+    day_number=date_1-date_2
+    str_day=str(day_number)
+    if "days" in str_day:
+        split_day=str_day.split(" days")[0]
+        if int(split_day)>=-150:
+            print(Fore.YELLOW+"[----] %s (%s) - day= %s " % (domain,ex_date,split_day)+Style.RESET_ALL)
+            print(Fore.RED+"[----] %s VULN (%s) " % (domain,ex_date)+Style.RESET_ALL)    
+            
+            
     if ex_date_years <= year:
-        if month<=ex_date_month:
-            print(Fore.RED+"[----] %s VULN (%s) " % (domain,ex_date)+Style.RESET_ALL)
+        print(Fore.RED+"[----] %s VULN (%s) " % (domain,ex_date)+Style.RESET_ALL)    
+            
+            
+    
+ 
 
 
 def whois_query(domain):
