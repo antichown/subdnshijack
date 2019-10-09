@@ -1,2 +1,2 @@
-# subdnshijack
-Subdomain Dns Hijack Scanner
+# Subdomain Dns Hijack Scanner
+
